@@ -32,8 +32,8 @@ export default function LoginCard() {
   return (
     <Card className="w-[25rem] border border-gray-700">
       <CardHeader>
-        <CardTitle>Register</CardTitle>
-        <CardDescription>Enter Email and Password to Register</CardDescription>
+        <CardTitle>Login</CardTitle>
+        <CardDescription>Enter Email and Password to Login</CardDescription>
       </CardHeader>
       <CardContent >
         <form className="flex flex-col gap-y-5" onSubmit={handleSubmit(onSubmit)} id="login-form">
