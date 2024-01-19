@@ -11,13 +11,16 @@ import {
 } from "@/components/ui/card";
 import { RegisterFormSchema, RegisterFormType } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 
 export default function RegisterCard() {
-
+	
+	const router = useRouter();
 	const [emailError, setEmailError] = useState(false);
 
 	console.log("reload");
@@ -31,13 +34,19 @@ export default function RegisterCard() {
 	});
 
 	const onSubmit = async (data: RegisterFormType) => {
-		axios.post("/api/auth/register", data).then((response) => {
-			console.log(response.data);
-			setEmailError(!response.data.status);
-		});
+		console.log("hi")
+		const response = await signIn("register", {
+			email: data.email,
+			password: data.password,
+			confirmPassword: data.confirmPassword,
+			redirect: false
+		})
 
-		
-	
+		if (response?.ok) {
+			router.push("/")
+			router.refresh()
+		}
+
 	}
 
   return (
@@ -54,7 +63,6 @@ export default function RegisterCard() {
 							className="border rounded-md px-3 py-2 ring-offset-background focus-visible:outline-none 
 							focus-visible:ring-2 focus-visible:ring-ring w-full border-gray-700" 
 							{...register("email")}
-
 						/>
 					
 					</div>
@@ -80,8 +88,8 @@ export default function RegisterCard() {
 					</div>
 			
         </form>
-				{(errors.email || emailError) && (
-						<h1 className="text-red-500">Invalid Email</h1>
+				{(emailError) && (
+						<h1 className="text-red-500">Email Already in use</h1>
 				)}
 				{(errors.password) && (
 						<h1 className="text-red-500">Invalid Password</h1>
@@ -92,7 +100,10 @@ export default function RegisterCard() {
 
       </CardContent>
       <CardFooter>
-        <Button form="login-form" type="submit" className="w-full" disabled={isSubmitting}>Enter</Button>
+				<div className="flex flex-col w-full items-end gap-y-2">
+        	<Button form="login-form" type="submit" className="w-full" disabled={isSubmitting}>Enter</Button>
+					<Link className="text-sm font-semibold hover:text-gray-600" href="/login">Have an account? Login</Link>
+				</div>
       </CardFooter>
     </Card>
   )

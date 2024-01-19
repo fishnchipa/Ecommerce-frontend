@@ -11,11 +11,16 @@ import {
 } from "@/components/ui/card";
 import { LoginFormSchema, LoginFormType } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 
 export default function LoginCard() {
-
+	const router = useRouter();
+	const [submitError, setSubmitError] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -25,8 +30,20 @@ export default function LoginCard() {
 		resolver: zodResolver(LoginFormSchema)
 	});
 
-	const onSubmit = (data: LoginFormType) => {
-		console.log(data);
+	const onSubmit = async (data: LoginFormType) => {
+		const response = await signIn("login", {
+			email: data.email,
+			password: data.password,
+			redirect: false,
+			
+		})
+		
+		if (response?.ok) {
+			router.push("/")
+			router.refresh()
+		} else {
+			setSubmitError(true)
+		}
 	}
 
   return (
@@ -57,12 +74,16 @@ export default function LoginCard() {
 						/>
 					</div>
         </form>
-				{(errors.email || errors.password) && (
+				{(errors.email || errors.password || submitError) && (
 						<h1 className="text-red-500">Invalid email or password</h1>
 					)}
       </CardContent>
       <CardFooter>
-        <Button form="login-form" type="submit" className="w-full" disabled={isSubmitting}>Enter</Button>
+				<div className="flex flex-col w-full items-end gap-y-2">
+        	<Button form="login-form" type="submit" className="w-full" disabled={isSubmitting}>Enter</Button>
+					<Link className="text-sm font-semibold hover:text-gray-600" href="/register">Register for an account?</Link>
+				</div>
+				
       </CardFooter>
     </Card>
   )
