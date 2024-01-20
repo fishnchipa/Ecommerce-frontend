@@ -1,13 +1,27 @@
 import React from 'react'
+import SearchBar from './search-bar'
+import CartIcon from './cart-icon'
+import ProfileIcon from './profile-icon'
+import QuickLinks from './quick-links'
 
 const NavBar = () => {
-	return (
-		<div className="bg-gray-400 w-full h-[10rem] flex flex-row justify-between px-4 py-4">
-			<h1>Title</h1>
-			<h1>Login</h1>
-			<h1>Logo</h1>
 
-		</div>
+	const a = [{page: "/home", content: "home"}, {page: "/about", content: "about"}, {page: "/socks", content: "socks"}]
+
+	return (
+		<>
+			<div className="w-full h-[4rem] flex flex-row items-center pt-1 ">
+				<div className="flex flex-row items-center justify-end w-[10rem] ml-3">
+					<h1 className="text-3xl ">Store</h1>
+				</div>
+				<SearchBar />
+				<div className="flex flex-row gap-x-5 mr-[5rem]">
+					<CartIcon />
+					<ProfileIcon />
+				</div>
+			</div>
+			<QuickLinks value={a}/>
+		</>
 	)
 }
 

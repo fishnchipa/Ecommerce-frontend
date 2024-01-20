@@ -1,7 +1,8 @@
 import React from 'react'
-import RegisterCard from '@/components/ui/register-card';
+
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth/next';
+import RegisterCard from '@/components/register-card';
 
 const page = async () => {
 	const session = await getServerSession()

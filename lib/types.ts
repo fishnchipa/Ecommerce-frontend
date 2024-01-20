@@ -21,3 +21,12 @@ export const RegisterFormSchema = z.object({
 export type RegisterFormType = z.infer<typeof RegisterFormSchema>;
 
 
+export type QuickLinksProps = {
+	value: {page: string, content: string}[]
+}
+
+export type BannerProps = {
+	width: number,
+	height: number,
+	image: string
+}
