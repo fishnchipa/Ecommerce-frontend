@@ -8,10 +8,8 @@ export default function RootLayout({
     <RootLayout>
 
 
-      <html lang="en">
-        
+      <html lang="en"> 
         <body>
-
           {children}
           
         </body>

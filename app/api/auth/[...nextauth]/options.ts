@@ -36,7 +36,7 @@ export const options: NextAuthOptions = {
 				if (correctPassword) {
 					return {
 						id: user.id,
-						email: user.email
+						email: user.email,
 					}
 				}
 				
@@ -79,7 +79,7 @@ export const options: NextAuthOptions = {
 				if (response.data.status) {
 					return {
 						id: response.data.id,
-						email: credentials?.email
+						email: credentials?.email,
 					}
 				}
 				
@@ -94,8 +94,16 @@ export const options: NextAuthOptions = {
 		error: '/login'
 	},
 
-
-	
+	callbacks: {
+		session: ({ session, token}) => ({
+			...session,
+			user: {
+				...session.user,
+				id: token.sub
+			}
+		})
+		
+  }
 	
 }
 
