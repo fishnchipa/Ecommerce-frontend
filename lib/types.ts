@@ -30,3 +30,17 @@ export type BannerProps = {
 	height: number,
 	image: string
 }
+export const ItemFormSchema = z.object({
+	name: z.string().min(1),
+	price: z.string(),
+	category: z.string().min(1)
+})
+
+export type ItemFormType = z.infer<typeof ItemFormSchema>;
+
+export type ItemType = {
+	id: number
+	name: string,
+	price: string,
+	category: string,
+}
