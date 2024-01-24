@@ -8,10 +8,12 @@ import axios from 'axios';
 import { ItemFormSchema, ItemFormType } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { error } from 'console';
+import { useItemContext } from '@/app/context/item-context';
 
 export default function AddItemCard() {
 
 	const [submitError, setSubmitError] = useState(false);
+	const context = useItemContext()
 
 	const {
 		register,
@@ -24,6 +26,8 @@ export default function AddItemCard() {
 
 	const onSubmit = async (data: ItemFormType) => {
 		const response = await axios.post("http://localhost:8080/items/create", data);
+
+		context.setItem((prev) => prev + 1)
 		console.log("Subed");
 		if (!response.status) {
 			setSubmitError(true);
@@ -32,7 +36,7 @@ export default function AddItemCard() {
 	}
 
 	return (
-		<Card>
+		<Card className="w-[300px]">
 			<CardHeader>
 				<CardTitle>Add Item to Store</CardTitle>
 				<CardDescription>

@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { DefaultSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface User extends DefaultSession {
 	id: string
@@ -20,7 +20,6 @@ const AddToCart = ({itemId}: {itemId: number}) => {
 				item: itemId
 			}
 		})
-		
 	}
 
 	return (
