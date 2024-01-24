@@ -9,27 +9,24 @@ import AddItemCard from "@/components/add-item-card";
 import ContentMain from "@/components/content-main";
 import NavBar from "@/components/ui/nav-bar";
 import { SessionProvider } from "next-auth/react";
+import ItemContextProvider from "./context/item-context";
 
 
 
 
-export default async function Home() {
-  // const session = await getServerSession(options);
-
-  // if (!session) {
-  //   redirect("/login")
-  // }
+export default function Home() {
 
   
-
   return (
     <>
       <SessionProvider>
 
         <NavBar />
-        <div className="flex justify-center items-center h-full w-full mx-[3rem] ">
-          <AddItemCard />
-          <ContentMain />
+        <div className="flex flex-wrap justify-center items-center h-fit w-full pl-4 mb-[5rem]">
+          <ItemContextProvider>
+            <AddItemCard /> 
+            <ContentMain />
+          </ItemContextProvider>
         </div>
       </SessionProvider>
     </>
