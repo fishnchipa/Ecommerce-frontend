@@ -10,7 +10,7 @@ interface User extends DefaultSession {
 }
 
 const AddToCart = ({itemId}: {itemId: number}) => {
-	const { data: session, status } = useSession()
+	const { data: session } = useSession()
 
 	const user = session?.user as User
 	const addToCart = () => {
