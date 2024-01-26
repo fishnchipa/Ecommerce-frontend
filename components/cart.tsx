@@ -10,65 +10,65 @@ import { useForm } from 'react-hook-form';
 import { useCartContext } from '@/app/context/cart-context';
 
 interface User extends DefaultSession {
-	id: string
+  id: string
 }
 
 
 const CartItems = () => {
-	const { data: session } = useSession()
-	const items = useRef<ItemType[]>([]);
-	const { cartItems } = useCartContext();
+  const { data: session } = useSession()
+  const items = useRef<ItemType[]>([]);
+  const { cartItems } = useCartContext();
 
-	useEffect(() => {
-		if (session) {
-			const user = session.user as User;
+  useEffect(() => {
+    if (session) {
+      const user = session.user as User;
 
-			axios.post("http://localhost:8080/cart", {
-				id: user.id
-			})
-			.then(response => {
-				items.current = response.data
-			})
-		}
-	})
-
-
-	const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		e.preventDefault();
-
-		const uniqueCart = cartItems.filter((value, index, array) => {
-			return index === array.findIndex((item) => item.itemId === value.itemId)
-		})
-
-		console.log(uniqueCart);
-	}
+      axios.post("http://localhost:8080/cart", {
+        id: user.id
+      })
+      .then(response => {
+        items.current = response.data
+      })
+    }
+  })
 
 
-	return (
-		<div className="">
-			<div className="flex flex-row justify-between">
-				<h1>Product</h1>
-				<h1>Quantity</h1>
-				<h1>Price</h1>
-			</div>
-			<form className="flex flex-col gap-y-5 ">
-				{items.current.map(product => {
-					return (
-						<CartItem 
-							key={product.id} 
-							id={product.id} 
-							name={product.name} 
-							price={product.price} 
-						  category={product.category} 
-						/>	
-					)
-				})}
-				<div className="flex flex-row justify-center">
-					<button className="w-fit" onClick={(e) => onClick(e)}>Click Me</button>
-				</div>
-			</form>
-		</div>
-	)
+  const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    const uniqueCart = cartItems.filter((value, index, array) => {
+      return index === array.findIndex((item) => item.itemId === value.itemId)
+    })
+
+    console.log(uniqueCart);
+  }
+
+
+  return (
+    <div className="">
+      <div className="flex flex-row justify-between">
+        <h1>Product</h1>
+        <h1>Quantity</h1>
+        <h1>Price</h1>
+      </div>
+      <form className="flex flex-col gap-y-5 ">
+        {items.current.map(product => {
+          return (
+            <CartItem 
+              key={product.id} 
+              id={product.id} 
+              name={product.name} 
+              price={product.price} 
+              category={product.category} 
+            />	
+          )
+        })}
+        <div className="flex flex-row justify-center">
+          <button className="w-fit" onClick={(e) => onClick(e)}>Click Me</button>
+        </div>
+      </form>
+    </div>
+  )
 }
 
 export default CartItems
