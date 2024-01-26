@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Trash } from 'lucide-react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
@@ -26,8 +26,13 @@ const CartItem = ({
 	const comboValue = useRef<string>("1")
 	const {cartItems, setCartItem} = useCartContext();
 
+	useEffect(() => {
+		setCartItem(prev => [...prev, {itemId: id, quantity: parseInt(comboValue.current)}])
+	},[])
+	
+	
 	const updateQuantity = () => {
-
+		
 		const index = cartItems.findIndex(item => item.itemId === id) 
 		if (index === -1) {
 			setCartItem([...cartItems, {itemId: id, quantity: parseInt(comboValue.current)}])

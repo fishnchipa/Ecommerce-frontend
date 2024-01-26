@@ -36,17 +36,22 @@ const CartItems = () => {
 	const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
 
-		console.log(cartItems)
+		const uniqueCart = cartItems.filter((value, index, array) => {
+			return index === array.findIndex((item) => item.itemId === value.itemId)
+		})
+
+		console.log(uniqueCart);
 	}
 
+
 	return (
-		<div className=" ">
+		<div className="">
 			<div className="flex flex-row justify-between">
 				<h1>Product</h1>
 				<h1>Quantity</h1>
 				<h1>Price</h1>
 			</div>
-			<form>
+			<form className="flex flex-col gap-y-5 ">
 				{items.current.map(product => {
 					return (
 						<CartItem 
@@ -54,11 +59,13 @@ const CartItems = () => {
 							id={product.id} 
 							name={product.name} 
 							price={product.price} 
-							category={product.category} 
-						/>
+						  category={product.category} 
+						/>	
 					)
 				})}
-				<button onClick={(e) => onClick(e)}>Click Me</button>
+				<div className="flex flex-row justify-center">
+					<button className="w-fit" onClick={(e) => onClick(e)}>Click Me</button>
+				</div>
 			</form>
 		</div>
 	)
