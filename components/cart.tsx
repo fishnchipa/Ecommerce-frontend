@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from 'react'
 import CartItem from './cart-items';
 import { useForm } from 'react-hook-form';
 import { useCartContext } from '@/app/context/cart-context';
+import { deleteCart } from '@/app/api/db/database';
 
 interface User extends DefaultSession {
   id: string
@@ -34,15 +35,28 @@ const CartItems = () => {
 
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
+    
 
     const uniqueCart = cartItems.filter((value, index, array) => {
       return index === array.findIndex((item) => item.itemId === value.itemId)
     })
 
+    if (session) {
+      const user = session.user as User;
+      const response = deleteCart(user.id)
+      console.log(response);
+    }
+
     console.log(uniqueCart);
   }
 
+  if (!items.current.length) {
+    return (
+      <div>
+        This cart is empty
+      </div>
+    )
+  }
 
   return (
     <div className="">
