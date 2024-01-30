@@ -1,18 +1,31 @@
+"use client"
+
 import { Search } from 'lucide-react'
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const SearchBar = () => {
-	return (
-		<>
+	const {
+		register,
+		handleSubmit,
 		
+	} = useForm()
+	return (
+		<form className=" w-[50rem] relative ">
 			<input 
-				className="h-fit p-2 rounded-md ring-offset-background 
-				focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring
-				w-full border border-gray-500 mr-[5rem] ml-[3rem]"
-				
+				className="w-full h-[35px] ring-offset-background focus-visible:outline-none 
+				border-b-2 border-black focus-visible:border-sky-400 transition bg-transparent" 
+				placeholder="Search by name, item, tag or description"
+				{...register("search")}
+				autoComplete="off"
 			/>
-			<Search className="absolute right-[15rem] invisible lg:visible"/>
-		</>
+			<button>
+				<Search 
+					size={25}
+					className="absolute top-1 right-2"
+				/>
+			</button>
+		</form>
 
 		
 		

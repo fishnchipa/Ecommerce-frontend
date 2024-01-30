@@ -4,13 +4,11 @@ import { User, UserRound } from 'lucide-react';
 
 const ProfileIcon = () => {
 	return (
-		<>
-			<button className="h-fit ">
-				<UserRound />
 
-			</button>
-		
-		</>
+		<button className="h-fit ">
+			<UserRound size={25}/>
+		</button>
+
 	)
 }
 
