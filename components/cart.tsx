@@ -35,7 +35,6 @@ const CartItems = () => {
 
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    
 
     const uniqueCart = cartItems.filter((value, index, array) => {
       return index === array.findIndex((item) => item.itemId === value.itemId)
