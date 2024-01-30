@@ -20,14 +20,25 @@ export default function Home() {
   return (
     <>
       <SessionProvider>
+        <div className="h-[2000px] w-full bg-emerald-500">
 
-        <NavBar />
-        <div className="flex flex-wrap justify-center items-center h-fit w-full pl-4 mb-[5rem]">
+          <NavBar />
+          <div className="h-screen bg-slate-600 flex justify-center items-center">
+
+            <Banner width={0} height={0} image={"/hero-bg.png"} />
+          </div>
+        </div>
+
+
+
+
+
+        {/* <div className="flex flex-wrap justify-center items-center h-fit w-full pl-4 mb-[5rem]">
           <ItemContextProvider>
             <AddItemCard /> 
             <ContentMain />
           </ItemContextProvider>
-        </div>
+        </div> */}
       </SessionProvider>
     </>
   )
