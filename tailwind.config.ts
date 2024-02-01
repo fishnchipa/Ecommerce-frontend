@@ -16,8 +16,13 @@ const config = {
       screens: {
         "2xl": "1400px",
       },
+
     },
     extend: {
+      screens: {
+        "first" : "1168px",
+        "second" : "1200px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -67,10 +72,12 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+
       },
     },
   },
