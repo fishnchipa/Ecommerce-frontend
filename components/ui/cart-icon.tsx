@@ -8,7 +8,10 @@ const CartIcon = () => {
 	const router = useRouter()
 
 	return (
-		<button className="h-fit" onClick={() => {router.push("/cart")}}>
+		<button 
+			className="h-fit" 
+			onClick={() => {router.push("/cart")}}
+			>
 			<ShoppingCart size={25}/>
 		</button>
 	)
