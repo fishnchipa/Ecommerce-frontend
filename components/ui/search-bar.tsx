@@ -11,7 +11,7 @@ const SearchBar = () => {
 		
 	} = useForm()
 	return (
-		<form className=" w-[50rem] relative ">
+		<form className="first:w-[50rem] relative w-full ">
 			<input 
 				className="w-full h-[35px] ring-offset-background focus-visible:outline-none 
 				border-b-2 border-black focus-visible:border-sky-400 transition bg-transparent" 
@@ -22,14 +22,10 @@ const SearchBar = () => {
 			<button>
 				<Search 
 					size={25}
-					className="absolute top-1 right-2"
+					className="absolute top-1 right-2 "
 				/>
 			</button>
 		</form>
-
-		
-		
-		
 		
 	)
 }
