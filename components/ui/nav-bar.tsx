@@ -30,7 +30,7 @@ const NavBar = () => {
     const nav = divRef.current;
     if (nav) {
       const navHeight = nav.clientHeight;
-      const range = 50;
+      const range = 200;
       const offset = navHeight / 2;
 
 
@@ -84,7 +84,7 @@ const NavBar = () => {
 
                 <div 
                   className={`fixed left-0 top-[70px] bottom-0
-                bg-white mt-5  ${open ? "right-full delay-100 overflow-hidden" : "right-0 delay-0"} 
+                bg-white mt-5  ${open ? "right-0 delay-0" : "right-full delay-100 overflow-hidden" } 
                   transition-all duration-300 ease-in-out`}
                     >
                   <form className="flex flex-col p-5 gap-y-5">
