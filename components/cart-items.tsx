@@ -76,34 +76,35 @@ const CartItem = ({
 
 	return (
 		<div className="flex flex-row justify-between">
-			<div className="flex flex-row gap-x-5">
+			<div className="flex flex-row gap-x-5 w-full ">
 				<img src="/acid.jpeg" alt="item" className="object-fit h-[150px] w-[150px]"/>
 				<div>
 					<h1 className="text-2xl font-semibold leading-none tracking-tight">{name}</h1>
 					<p className="text-sm text-muted-foreground">{category}</p>
 				</div>
 			</div>
-			<div className="mr-[12rem]">
+			<div className=" w-full">
 				{
 					(comboBox) ? 
 					(
 						<select 
 							className="border rounded-md px-2 ring-offset-background focus-visible:outline-none 
-							h-[2rem] w-[11.5rem] focus-visible:ring-2 focus-visible:ring-ring border-gray-700 mr-[1px] mt-[2px]
+							hover:cursor-pointer 
+							h-[2rem] w-[11.5rem] focus-visible:ring-2 focus-visible:ring-ring border-gray-700 mt-[2px] ml-[1rem]
 							text-[12px]" 
 							onChange={(e) => customQuantity(e)} 
 							defaultValue={comboValue.current}
 						>
 							{quantity.map((value,index) => {
-
-								return <option key={index}>{value}</option>
+								return <option className="hover:cursor-pointer" key={index}>{value}</option>
 							})}
 						</select>
 					) : 
 					(
 						<div className="flex gap-x-2 justify-center items-center">
 							<input 
-								className="border rounded-md px-3 py-2 ring-offset-background focus-visible:outline-none 
+								className="border rounded-md px-3 py-2 ring-offset-background focus-visible:outline-none
+								
 								h-[2rem] w-[6rem] focus-visible:ring-2 focus-visible:ring-ring border-gray-700 text-[12px]" 
 								type="number" 
 								placeholder="quantity" 
@@ -120,7 +121,7 @@ const CartItem = ({
 					)
 				}
 			</div>
-			<div className="flex flex-col justify-between items-center">
+			<div className="flex flex-col justify-between items-end w-[10rem]">
 				<h1 className="text-2xl font-semibold leading-none tracking-tight">${price}</h1>
 				<Trash />
 			</div>
