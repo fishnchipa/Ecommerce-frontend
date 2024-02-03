@@ -17,3 +17,13 @@ export function deleteCart(id: string) {
 		return response.data;
 	})
 }
+
+export function addToCart(userId: string, itemId: string) {
+
+	axios.post("http://localhost:8080/cart/add", {
+		id: {
+			user: userId,
+			item: itemId
+		}
+	})
+}
