@@ -25,7 +25,7 @@ const ContentMain = () => {
 	}
 
 	return (
-		<div className="flex flex-wrap w-fit">
+		<div className="flex flex-wrap first:w-[1200px] ">
 			{content.map((item) => {
 				return <ItemCard key={item.id} name={item.name} price={item.price} category={item.category} id={item.id}/>
 			})}
